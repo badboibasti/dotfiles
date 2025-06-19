@@ -1,0 +1,45 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 30,
+  "margin-top": 10,  
+  "margin-left": 20,  
+  "margin-right": 20, 
+  "margin-bottom": 0,
+
+
+  "modules-left": ["hyprland/workspaces", "hyprland/window"],
+  "modules-center": [],
+  "modules-right": ["cpu", "memory", "temperature", "custom/weather", "clock"],
+  "hyprland/workspaces": {
+    "format": "{name}",
+    "on-click": "activate"
+  },
+  "hyprland/window": {
+    "format": "{}",
+    "max-length": 50
+  },
+  "clock": {
+    "format": "{:%a %b %d %H:%M}",
+    "tooltip-format": "{:%Y-%m-%d %H:%M:%S}"
+  },
+  "cpu": {
+    "format": " {usage}%",
+    "tooltip": false
+  },
+  "memory": {
+    "format": " {used:0.1f}G",
+    "tooltip": false
+  },
+  "temperature": {
+    "critical-threshold": 80,
+    "format": " {temperatureC}°C"
+  },
+  "custom/weather": {
+    "format": "{}",
+    "interval": 600,
+    "exec": "~/.config/waybar/scripts/weather.sh",
+    "return-type": "json",
+    "tooltip": true
+}
+}
