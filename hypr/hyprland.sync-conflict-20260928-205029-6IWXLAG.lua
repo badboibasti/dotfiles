@@ -1,0 +1,676 @@
+-- Hyprland 0.55.2 configuration
+-- Based on the official Hyprland v0.55.2 Lua configuration API
+
+------------------
+---- MONITORS ----
+------------------
+
+-- Laptop display
+hl.monitor({
+    output = "eDP-1",
+    mode = "preferred",
+    position = "auto",
+    scale = 1.88,
+})
+
+-- External monitor
+hl.monitor({
+    output = "DP-2",
+    mode = "preferred",
+    position = "auto",
+    scale = 1.3,
+})
+
+-- Framework Laptop 13 display
+hl.monitor({
+    output = "desc:BOE NE135A1M-NY1",
+    mode = "preferred",
+    position = "auto",
+    scale = 1.88,
+})
+
+-- ThinkPad X1 Carbon Gen 13 display
+hl.monitor({
+    output = "desc:Chimei Innolux Corporation N140JLG-GT3",
+    mode = "preferred",
+    position = "auto",
+    scale = 1.33,
+})
+
+-- Office - Iiyama monitor
+hl.monitor({
+    output = "desc:Iiyama North America PL2875UH 0x0000007F",
+    mode = "preferred",
+    position = "auto",
+    scale = 2,
+})
+
+-- Office - Philips monitor
+hl.monitor({
+    output = "desc:Philips Consumer Electronics Company PHL 345B1C UK02143006882",
+    mode = "preferred",
+    position = "auto",
+    scale = 1.5,
+})
+
+
+---------------------
+---- PROGRAMS -------
+---------------------
+
+local terminal = "kitty"
+local menu = "hyprlauncher"
+
+
+-------------------
+---- AUTOSTART ----
+-------------------
+
+hl.on("hyprland.start", function()
+    hl.exec_cmd("hyprpaper")
+    hl.exec_cmd("hypridle")
+    hl.exec_cmd("hyprsunset")
+    hl.exec_cmd("protonvpn connect")
+end)
+
+
+-------------------------------
+---- ENVIRONMENT VARIABLES ----
+-------------------------------
+
+hl.env("XCURSOR_SIZE", "24")
+hl.env("HYPRCURSOR_SIZE", "24")
+
+
+-----------------------
+---- LOOK AND FEEL ----
+-----------------------
+
+hl.config({
+    general = {
+        gaps_in = 5,
+        gaps_out = 20,
+        border_size = 2,
+
+        col = {
+            active_border = "rgba(ffffffff)",
+            inactive_border = "rgba(808080ff)",
+        },
+
+        resize_on_border = false,
+        allow_tearing = false,
+        layout = "dwindle",
+    },
+
+    decoration = {
+        rounding = 0,
+
+        active_opacity = 0.9,
+        inactive_opacity = 0.8,
+
+        shadow = {
+            enabled = false,
+        },
+
+        blur = {
+            enabled = true,
+            size = 6,
+            passes = 2,
+            vibrancy = 0.15,
+        },
+    },
+
+    animations = {
+        enabled = true,
+    },
+})
+
+
+-------------------
+---- ANIMATIONS ----
+-------------------
+
+-- hl.curve("easeOut", {
+--     type = "bezier",
+--     points = {
+--         { 0.16, 1 },
+--         { 0.3, 1 },
+--     },
+-- })
+
+-- hl.curve("easeInOut", {
+--     type = "bezier",
+--     points = {
+--         { 0.65, 0 },
+--         { 0.35, 1 },
+--     },
+-- })
+
+
+hl.animation({
+    leaf = "windows",
+    enabled = true,
+    speed = 4,
+    bezier = "easeOut",
+})
+
+hl.animation({
+    leaf = "windowsIn",
+    enabled = true,
+    speed = 3,
+    bezier = "easeOut",
+    style = "slide",
+})
+
+hl.animation({
+    leaf = "windowsOut",
+    enabled = true,
+    speed = 3,
+    bezier = "easeOut",
+    style = "slide",
+})
+
+hl.animation({
+    leaf = "border",
+    enabled = true,
+    speed = 3,
+    bezier = "easeOut",
+})
+
+hl.animation({
+    leaf = "fade",
+    enabled = true,
+    speed = 4,
+    bezier = "easeOut",
+})
+
+hl.animation({
+    leaf = "workspaces",
+    enabled = true,
+    speed = 2,
+    bezier = "easeInOut",
+    style = "slide",
+})
+
+
+-------------------
+---- DWINDLE ------
+-------------------
+
+hl.config({
+    dwindle = {
+        preserve_split = true,
+    },
+})
+
+
+----------------
+---- MISC ------
+----------------
+
+hl.config({
+    misc = {
+        force_default_wallpaper = 0,
+        disable_hyprland_logo = true,
+    },
+})
+
+
+---------------
+---- INPUT ----
+---------------
+
+hl.config({
+    input = {
+        kb_layout = "de",
+        kb_variant = "",
+        kb_model = "",
+        kb_options = "",
+        kb_rules = "",
+
+        follow_mouse = 1,
+        sensitivity = 0,
+
+        touchpad = {
+            tap_to_click = true,
+            natural_scroll = true,
+            clickfinger_behavior = true,
+        },
+    },
+})
+
+
+---------------------
+---- HHKB -----------
+---------------------
+
+hl.device({
+    name = "hhkb-hybrid_1-keyboard",
+    kb_layout = "us",
+})
+
+
+---------------------
+---- KEYBINDINGS ----
+---------------------
+
+local mainMod = "SUPER"
+
+
+-- Terminal
+hl.bind(
+    mainMod .. " + RETURN",
+    hl.dsp.exec_cmd(terminal)
+)
+
+
+-- Close window
+hl.bind(
+    mainMod .. " + Q",
+    hl.dsp.window.close()
+)
+
+
+-- Launcher
+hl.bind(
+    mainMod .. " + SPACE",
+    hl.dsp.exec_cmd(menu)
+)
+
+
+-- Reload
+hl.bind(
+    mainMod .. " + SHIFT + C",
+    hl.dsp.exec_cmd("hyprctl reload")
+)
+
+
+-- Exit Hyprland
+hl.bind(
+    mainMod .. " + SHIFT + E",
+    hl.dsp.exec_cmd(
+        "hyprctl dispatch 'hl.dsp.exit()'"
+    )
+)
+
+
+-- Lock
+hl.bind(
+    mainMod .. " + CTRL + Q",
+    hl.dsp.exec_cmd("hyprlock")
+)
+
+
+---------------------
+---- APPLICATIONS ---
+---------------------
+
+hl.bind(
+    mainMod .. " + B",
+    hl.dsp.exec_cmd("firefox")
+)
+
+hl.bind(
+    mainMod .. " + A",
+    hl.dsp.exec_cmd("firefox https://chatgpt.com")
+)
+
+hl.bind(
+    mainMod .. " + N",
+    hl.dsp.exec_cmd(
+        "kitty -e vim +'cd ~/Notes | Rg'"
+    )
+)
+
+hl.bind(
+    mainMod .. " + M",
+    hl.dsp.exec_cmd("spotify-launcher")
+)
+
+hl.bind(
+    mainMod .. " + E",
+    hl.dsp.exec_cmd("kitty -e neomutt")
+)
+
+hl.bind(
+    mainMod .. " + T",
+    hl.dsp.exec_cmd("kitty -e taskwarrior-tui")
+)
+
+hl.bind(
+    mainMod .. " + P",
+    hl.dsp.exec_cmd("keepassxc")
+)
+
+hl.bind(
+    mainMod .. " + O",
+    hl.dsp.exec_cmd(
+        "kitty -e sh -c 'ollama serve && run hf.co/mav23/Pentest_AI-GGUF:Q8_0'"
+    )
+)
+
+
+---------------------
+---- FOCUS ----------
+---------------------
+
+hl.bind(
+    mainMod .. " + H",
+    hl.dsp.focus({ direction = "left" })
+)
+
+hl.bind(
+    mainMod .. " + J",
+    hl.dsp.focus({ direction = "down" })
+)
+
+hl.bind(
+    mainMod .. " + K",
+    hl.dsp.focus({ direction = "up" })
+)
+
+hl.bind(
+    mainMod .. " + L",
+    hl.dsp.focus({ direction = "right" })
+)
+
+hl.bind(
+    mainMod .. " + LEFT",
+    hl.dsp.focus({ direction = "left" })
+)
+
+hl.bind(
+    mainMod .. " + DOWN",
+    hl.dsp.focus({ direction = "down" })
+)
+
+hl.bind(
+    mainMod .. " + UP",
+    hl.dsp.focus({ direction = "up" })
+)
+
+hl.bind(
+    mainMod .. " + RIGHT",
+    hl.dsp.focus({ direction = "right" })
+)
+
+
+---------------------
+---- MOVE WINDOWS ---
+---------------------
+
+hl.bind(
+    mainMod .. " + SHIFT + H",
+    hl.dsp.window.move({ direction = "left" })
+)
+
+hl.bind(
+    mainMod .. " + SHIFT + J",
+    hl.dsp.window.move({ direction = "down" })
+)
+
+hl.bind(
+    mainMod .. " + SHIFT + K",
+    hl.dsp.window.move({ direction = "up" })
+)
+
+hl.bind(
+    mainMod .. " + SHIFT + L",
+    hl.dsp.window.move({ direction = "right" })
+)
+
+hl.bind(
+    mainMod .. " + SHIFT + LEFT",
+    hl.dsp.window.move({ direction = "left" })
+)
+
+hl.bind(
+    mainMod .. " + SHIFT + DOWN",
+    hl.dsp.window.move({ direction = "down" })
+)
+
+hl.bind(
+    mainMod .. " + SHIFT + UP",
+    hl.dsp.window.move({ direction = "up" })
+)
+
+hl.bind(
+    mainMod .. " + SHIFT + RIGHT",
+    hl.dsp.window.move({ direction = "right" })
+)
+
+
+---------------------
+---- WORKSPACES -----
+---------------------
+
+for i = 1, 10 do
+    local key = i % 10
+
+    hl.bind(
+        mainMod .. " + " .. key,
+        hl.dsp.focus({ workspace = i })
+    )
+
+    hl.bind(
+        mainMod .. " + SHIFT + " .. key,
+        hl.dsp.window.move({ workspace = i })
+    )
+end
+
+
+---------------------
+---- WINDOW ACTIONS -
+---------------------
+
+hl.bind(
+    mainMod .. " + F",
+    hl.dsp.window.fullscreen()
+)
+
+hl.bind(
+    mainMod .. " + SHIFT + SPACE",
+    hl.dsp.window.float({
+        action = "toggle"
+    })
+)
+
+
+-- Dwindle split toggle.
+-- The old "togglesplit" dispatcher was removed.
+hl.bind(
+    mainMod .. " + D",
+    hl.dsp.exec_cmd(
+        "hyprctl dispatch layoutmsg togglesplit"
+    )
+)
+
+
+---------------------
+---- SPECIAL WS -----
+---------------------
+
+hl.bind(
+    mainMod .. " + SHIFT + MINUS",
+    hl.dsp.window.move({
+        workspace = "special:magic"
+    })
+)
+
+hl.bind(
+    mainMod .. " + MINUS",
+    hl.dsp.workspace.toggle_special("magic")
+)
+
+
+---------------------
+---- MOUSE ----------
+---------------------
+
+hl.bind(
+    mainMod .. " + mouse:272",
+    hl.dsp.window.drag(),
+    { mouse = true }
+)
+
+hl.bind(
+    mainMod .. " + mouse:273",
+    hl.dsp.window.resize(),
+    { mouse = true }
+)
+
+
+---------------------
+---- AUDIO ----------
+---------------------
+
+hl.bind(
+    "XF86AudioRaiseVolume",
+    hl.dsp.exec_cmd(
+        "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
+    ),
+    {
+        locked = true,
+        repeating = true,
+    }
+)
+
+hl.bind(
+    "XF86AudioLowerVolume",
+    hl.dsp.exec_cmd(
+        "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+    ),
+    {
+        locked = true,
+        repeating = true,
+    }
+)
+
+hl.bind(
+    "XF86AudioMute",
+    hl.dsp.exec_cmd(
+        "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+    ),
+    {
+        locked = true,
+        repeating = true,
+    }
+)
+
+hl.bind(
+    "XF86AudioMicMute",
+    hl.dsp.exec_cmd(
+        "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+    ),
+    {
+        locked = true,
+        repeating = true,
+    }
+)
+
+
+---------------------
+---- BRIGHTNESS -----
+---------------------
+
+hl.bind(
+    "XF86MonBrightnessUp",
+    hl.dsp.exec_cmd(
+        "brightnessctl -e4 -n2 set 5%+"
+    ),
+    {
+        locked = true,
+        repeating = true,
+    }
+)
+
+hl.bind(
+    "XF86MonBrightnessDown",
+    hl.dsp.exec_cmd(
+        "brightnessctl -e4 -n2 set 5%-"
+    ),
+    {
+        locked = true,
+        repeating = true,
+    }
+)
+
+
+---------------------
+---- DDCUTIL --------
+---------------------
+
+hl.bind(
+    mainMod .. " + F5",
+    hl.dsp.exec_cmd(
+        "ddcutil setvcp 10 + 10"
+    )
+)
+
+
+---------------------
+---- SCREENSHOT -----
+---------------------
+
+hl.bind(
+    "PRINT",
+    hl.dsp.exec_cmd("grim")
+)
+
+
+---------------------
+---- WINDOW RULES ---
+---------------------
+
+hl.window_rule({
+    name = "floating-border",
+    match = {
+        float = true,
+    },
+    border_size = 1,
+})
+
+
+hl.window_rule({
+    name = "suppress-maximize-events",
+
+    match = {
+        class = ".*",
+    },
+
+    suppress_event = "maximize",
+})
+
+---------------------
+---- LID SWITCH -----
+---------------------
+
+hl.bind(
+    "switch:on:Lid Switch",
+    function()
+        hl.monitor({
+            output = "eDP-1",
+            disabled = true,
+        })
+    end,
+    {
+        locked = true,
+    }
+)
+
+hl.bind(
+    "switch:off:Lid Switch",
+    function()
+        hl.monitor({
+            output = "eDP-1",
+            mode = "preferred",
+            position = "auto",
+            scale = 1.33,
+            disabled = false,
+        })
+    end,
+    {
+        locked = true,
+    }
+)
+

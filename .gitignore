@@ -1,0 +1,17 @@
+# Secrets
+*.secret
+*.key
+*.pem
+.env
+.env.*
+
+# SSH
+.ssh/
+
+# Caches
+.cache/
+*.cache
+
+# Machine-specific
+.local/
+
