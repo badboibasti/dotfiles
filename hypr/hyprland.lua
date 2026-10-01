@@ -2,16 +2,10 @@
 ---- MONITORS ----
 ------------------
 
--- Laptop display
-hl.monitor({
-    output = "eDP-1",
-    scale = 1.33,
-})
-
--- External monitor
-hl.monitor({
-    output = "DP-2",
-    scale = 1.3,
+-- External monitor 
+hl.monitor({ 
+	output = "DP-2", 
+	scale = 1.33, 
 })
 
 -- Framework Laptop 13 display
@@ -37,7 +31,6 @@ hl.monitor({
     output = "desc:Philips Consumer Electronics Company PHL 345B1C UK02143006882",
     scale = 1.5,
 })
-
 
 ---------------------
 ---- MY PROGRAMS ----
@@ -562,11 +555,12 @@ hl.window_rule({
     suppress_event = "maximize",
 })
 
+
 ---------------------
 ---- LID SWITCH -----
 ---------------------
 
--- Disable laptop display when lid closes
+-- Disable Framework display when lid closes
 hl.bind(
     "switch:on:Lid Switch",
     function()
@@ -578,7 +572,7 @@ hl.bind(
     { locked = true }
 )
 
--- Re-enable laptop display when lid opens
+-- Re-enable Framework display when lid opens
 hl.bind(
     "switch:off:Lid Switch",
     function()
