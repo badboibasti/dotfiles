@@ -151,7 +151,7 @@ hl.animation({
     leaf = "windowsMove",
     enabled = true,
     speed = 4,
-    bezier = "easeOut",
+    bezier = "easeOutQuint",
 })
 
 -- Opening windows
@@ -159,7 +159,7 @@ hl.animation({
     leaf = "windowsIn",
     enabled = true,
     speed = 3,
-    bezier = "easeOut",
+    bezier = "easeOutQuint",
     style = "slide",
 })
 
@@ -168,7 +168,7 @@ hl.animation({
     leaf = "windowsOut",
     enabled = true,
     speed = 3,
-    bezier = "easeOut",
+    bezier = "easeOutQuint",
     style = "slide",
 })
 
@@ -177,7 +177,7 @@ hl.animation({
     leaf = "border",
     enabled = true,
     speed = 3,
-    bezier = "easeOut",
+    bezier = "easeOutQuint",
 })
 
 -- Fading
@@ -185,7 +185,7 @@ hl.animation({
     leaf = "fade",
     enabled = true,
     speed = 3,
-    bezier = "easeOut",
+    bezier = "easeOutQuint",
 })
 
 -- Workspace switching
@@ -193,7 +193,7 @@ hl.animation({
     leaf = "workspaces",
     enabled = true,
     speed = 2,
-    bezier = "easeInOut",
+    bezier = "easeInOutCubic",
     style = "slide",
 })
 
