@@ -16,7 +16,7 @@ hl.monitor({
 
 -- ThinkPad X1 Carbon Gen 13 monitor
 hl.monitor({
-    output = "desc:Chimei Innolux Corporation N140JLG-GT3 Unknown",
+    output = "desc:Chimei Innolux Corporation N140JLG-GT3",
     scale = 1.33,
 })
 
