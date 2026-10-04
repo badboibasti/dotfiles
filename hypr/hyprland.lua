@@ -106,12 +106,16 @@ hl.config({
             enabled = true,
             size = 6,
             passes = 2,
-            vibrancy = 0.15,	   
+            vibrancy = 0.15,
         },
     },
 
     animations = {
         enabled = true,
+    },
+
+    xwayland = {
+        force_zero_scaling = true,
     },
 })
 
